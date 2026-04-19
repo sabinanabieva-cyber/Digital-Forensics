@@ -62,4 +62,35 @@ remote access, API hooking, and process injection.
 - [Finding 2 - Rootkit Detection](findings/rootkit-indicators.md)
 - [Finding 3 - API Hook Analysis](findings/api-hooks.md)
 - [Finding 4 - Injected Code](findings/injected-code.md)
-- [Finding 5 - Remote Access Software](findings/remote-a
+- [Finding 5 - Remote Access Software](findings/remote-access.md)
+
+---
+
+## Executive Summary
+Memory forensic analysis of the Deepship endpoint revealed 
+strong evidence of malicious insider activity. A hidden process 
+(wsmprovhost.ex, PID 464) was found exhibiting rootkit behavior 
+through Direct Kernel Object Manipulation (DKOM), making it 
+invisible to standard process listing while remaining detectable 
+via raw memory scanning. Malicious API hooks with an unknown 
+hooking module were identified targeting pspluginwkr-v3.dll, 
+intercepting the InitPlugin function and redirecting execution 
+to injected code at address 0x7ffb8a61623a. Evidence of 
+unauthorized RDP access was confirmed via rdpclip.exe (PID 1072) 
+and a second winlogon session. Additionally, remote access 
+software (winvnc + websockify via node.exe) was found installed 
+as a service through nssm.exe, indicating deliberate persistence 
+mechanisms were established by the insider threat.
+
+---
+
+## MITRE ATT&CK Mapping
+
+| Technique ID | Name | Finding |
+|-------------|------|---------|
+| T1014 | Rootkit | DKOM process hiding |
+| T1055 | Process Injection | Injected code in memory |
+| T1179 | Hooking | API hooks in wsmprovhost.ex |
+| T1021.001 | Remote Desktop Protocol | Unauthorized RDP via rdpclip.exe |
+| T1219 | Remote Access Software | winvnc + websockify installation |
+| T1547 | Boot or Logon Autostart | nssm.exe service persistence |
