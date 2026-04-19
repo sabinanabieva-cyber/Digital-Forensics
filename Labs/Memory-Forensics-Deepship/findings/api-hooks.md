@@ -31,7 +31,7 @@ Normal function entry:
 0x7ffb8a616232  PUSH EBP
 0x7ffb8a616234  MOV EBP, ESP
 Hooked function entry:
-0x7ffb8a616230  JMP 0x7ffb8a61623a   ← overwrites legitimate instructions
+0x7ffb8a616230  JMP 0x7ffb8a61623a   <- overwrites legitimate instructions
 0x7ffb8a616232  UD2
 0x7ffb8a616234  JMP QWORD [RIP+0xefe]
 
@@ -40,7 +40,7 @@ A legitimate hook always belongs to an identifiable,
 file-backed module (e.g. an antivirus DLL). When Volatility 
 cannot attribute a hook to any known loaded module, it labels 
 it as <unknown>. This means the hook resides in private, 
-injected memory with no corresponding file on disk — a 
+injected memory with no corresponding file on disk, a 
 definitive indicator of malicious activity.
 
 ---
