@@ -4,7 +4,7 @@
 A hidden process was identified by cross-referencing pslist 
 and psscan output using the psxview plugin. The process was 
 invisible to standard process enumeration but detectable via 
-raw memory scanning — a classic indicator of Direct Kernel 
+raw memory scanning, a classic indicator of Direct Kernel 
 Object Manipulation (DKOM).
 
 ---
@@ -38,7 +38,7 @@ pslist (with no exit timestamp) is actively hiding.
 
 ## Evidence
 
-### psxview Output — wsmprovhost.ex (PID 464)
+### psxview Output: wsmprovhost.ex (PID 464)
 
 | Memory Address | pslist | psscan | csrss | Other Columns |
 |----------------|--------|--------|-------|---------------|
@@ -53,12 +53,12 @@ pslist (with no exit timestamp) is actively hiding.
 - **No exit timestamp** present despite being absent from pslist
 - A legitimately terminated process would show an exit time
 - Absence of exit time while hidden from pslist = active concealment
-- All other columns False — process hiding from every detection method except raw memory scan
+- All other columns False: process hiding from every detection method except raw memory scan
 
 ### DKOM Visualization
 
 Normal linked list:
-[svchost] <-> [wsmprovhost.ex] ↔ [explorer]
+[svchost] <-> [wsmprovhost.ex] <-> [explorer]
 After DKOM manipulation:
 [svchost] <-> [explorer]
  |
