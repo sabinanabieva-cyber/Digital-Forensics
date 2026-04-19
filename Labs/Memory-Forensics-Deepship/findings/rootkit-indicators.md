@@ -1,4 +1,4 @@
-# Finding 2 — Rootkit Detection via DKOM
+# Finding 2: Rootkit Detection via DKOM
 
 ## Overview
 A hidden process was identified by cross-referencing pslist 
